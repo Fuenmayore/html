@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Me amas?</title>
+  <style>
+    body {
+      background-color: #FFC0CB; /* Color rosa */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #contenedor {
+      text-align: center;
+    }
+
+    #si-btn {
+      font-size: 16px;
+    }
+
+    #no-btn {
+      font-size: 16px;
+    }
+
+    .te-amo {
+      font-size: 80px;
+      opacity: 0;
+      animation: aparecer 1s ease forwards;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="contenedor">
+    <h1>Si me Amas?</h1>
+    <h1 id="mensaje"></h1>
+    <button id="si-btn">Sí</button>
+    <button id="no-btn">No</button>
+    <span id="te-amo" class="te-amo"></span>
+  </div>
+  <script src="script.js"></script>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var mensajeElement = document.getElementById("mensaje");
+    var siBtn = document.getElementById("si-btn");
+    var noBtn = document.getElementById("no-btn");
+    var teAmoSpan = document.getElementById("te-amo");
+    var fontSize = 16; // Tamaño de fuente inicial
+
+    function mostrarMensaje(mensaje) {
+      mensajeElement.innerText = mensaje;
+    }
+
+    function onNoButtonClick() {
+      mostrarMensaje("Oh, qué triste...");
+      fontSize += 2; // Incrementar el tamaño de fuente
+      siBtn.style.fontSize = fontSize + "px"; // Aplicar el nuevo tamaño de fuente
+    }
+
+    function mostrarTeAmo() {
+      teAmoSpan.innerText = "Te amo";
+      teAmoSpan.classList.add("te-amo");
+    }
+
+    siBtn.addEventListener("click", function() {
+      mostrarMensaje("¡Sabía que lo harías!");
+      mostrarTeAmo();
+    });
+
+    noBtn.addEventListener("click", onNoButtonClick);
+
+    var respuesta = prompt("¿Me amas?");
+    if (respuesta && respuesta.toLowerCase() === "no") {
+      mostrarMensaje("Oh, qué triste...");
+      // Inicialmente, se incrementa el tamaño del botón de 'Sí' si la respuesta es 'no'
+      fontSize += 2;
+      siBtn.style.fontSize = fontSize + "px"; // Aplicar el nuevo tamaño de fuente
+    } else {
+      mostrarMensaje("¡Qué hermoso!");
+    }
+  });
+</script>
+</html>
